@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>an-Controller</title>
+</head>
+<body ng-app="controllerApp">
+	<div ng-controller="box">
+		<button ng-click="btn01()">btn01</button>
+		<button ng-click="btn02()">btn02</button><br>
+		<p>I click the {{btn}} button</p>
+	</div>
+
+	<script src="angular.js"></script>
+	<script>
+		var controllerApp = angular.module("controllerApp",[]);
+		controllerApp.controller('box',['$scope',function($scope){
+			$scope.btn = 'nothing';
+
+			$scope.btn01 = function() {
+				$scope.btn = '01';
+			}
+
+			$scope.btn02 = function() {
+				$scope.btn = '02';
+			};
+
+		}]);
+	</script>
+</body>
+</html>
