@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>an-03 $scope</title>
+</head>
+<body ng-app="scopeApp">
+	<div ng-controller="scopeCtrl">
+		<h1>$scope as Data-Model</h1>
+		<input type="text" ng-model="userName">
+		<button ng-click="showName()">click</button>	
+		<br>
+		通过{{}}绑定:<p>{{guestName}}</p>
+		<br>
+		通过ng-bind绑定：<p ng-bind="guestName"></p>
+	</div>
+
+	<script src="angular.js"></script>
+	<script>
+	var scopeApp = angular.module('scopeApp',[]);
+
+	scopeApp.controller("scopeCtrl",['$scope',function($scope){
+		$scope.userName = "Karen";//controller can write data into scope.
+
+		$scope.showName = function(){
+			$scope.guestName = 'Hello '+ $scope.userName + '!';
+		}
+	}]);
+	</script>
+</body>
+</html>

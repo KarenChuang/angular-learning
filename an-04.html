@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>an-04 Scope-Hierarchies</title>
+</head>
+<body ng-app="HierarchiesApp">
+	<h2>Scope的层级</h2>
+	<p>$rootScope作为根作用域，在全局中有效，一个ng-app就存在一个rootScope</p>
+	<p>一些指令可以创建多个子作用域，在每个controlller中</p>
+	<br>
+	<div class="box">
+		<div ng-controller="scopeCtrl">
+			{{name}}
+		</div>
+		<ul ng-controller="listCtrl">
+			<li ng-repeat="name in names">
+				{{name}} -- {{department}}
+			</li>
+		</ul>
+	</div>
+
+	<script src="angular.js"></script>
+	<script>
+		var HierarchiesApp = angular.module("HierarchiesApp",[]);
+		HierarchiesApp.controller("scopeCtrl",function($scope,$rootScope){
+			$scope.name = "Karen";
+			$rootScope.department = "BD";//在不同的controller中都可以访问到。
+		});
+		HierarchiesApp.controller("listCtrl",function($scope,$rootScope){
+			$scope.names = ['Davie','Joe','Mary'];
+		});
+		
+	</script>
+</body>
+</html>
