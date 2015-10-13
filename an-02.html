@@ -5,16 +5,22 @@
 	<title>an-Controller</title>
 </head>
 <body ng-app="controllerApp">
-	<div ng-controller="box">
+	<div ng-controller="box01">
 		<button ng-click="btn01()">btn01</button>
 		<button ng-click="btn02()">btn02</button><br>
 		<p>I click the {{btn}} button</p>
+	</div>
+	<br>
+	<div ng-controller="box02">
+		<button ng-click="add(2)">add</button>
+		<button ng-click="sub(3)">sub</button>
+		<p>{{value}}</p>
 	</div>
 
 	<script src="angular.js"></script>
 	<script>
 		var controllerApp = angular.module("controllerApp",[]);
-		controllerApp.controller('box',['$scope',function($scope){
+		controllerApp.controller('box01',['$scope',function($scope){
 			$scope.btn = 'nothing';
 
 			$scope.btn01 = function() {
@@ -25,6 +31,16 @@
 				$scope.btn = '02';
 			};
 
+		}]);
+		controllerApp.controller('box02',['$scope',function($scope){
+			$scope.value = 10;
+
+			$scope.add = function(amount) {
+				$scope.value += amout;
+			}
+			$scope.sub = function(amount) {
+				$scope.value -= amount
+			}
 		}]);
 	</script>
 </body>
