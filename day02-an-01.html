@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>内置指令</title>
+</head>
+
+
+<body ng-app="myApp">
+	
+	<!-- 01-ng-disabled="exp" -->
+	<input type="text" ng-model="name" >
+	<button ng-disabled="!name">btn</button>
+	
+	<!-- 02-ng-readonly -->
+	<!-- someText表达式为真的时候，第二个input变成readonly -->
+	<input type="text" ng-model="someText"><br>
+	<input type="text" ng-readonly="someText" value="read only" >
+
+	<!-- 03-ng-checked 设置checkbox-->
+	{{exp}}
+	<input type="checkbox" ng-checked="exp" ng-init="exp = true">
+
+	<!-- 04-ng-selected -->
+	<div ng-controller="Ctrl01">
+		<label>Select Two Fish:</label>
+	  	<input type="checkbox"
+	         ng-model="isTwoFish"><br/>
+	  	<select>
+	    	<option>One Fish</option>
+	    	<option ng-selected="isTwoFish">Two Fish</option>
+	  	</select>
+
+	</div>
+
+  	<!-- 05-ng-href ng-src -->
+  	<br>
+  	<a ng-href="{{ myHref }}">kaka</a>
+  	<p>跟ng-bind的效果类似，在链接没有生成之前，可以使页面有一个友好的提示，而不是出现</p>
+  	<a href="{{ myHref }}">kaka</a>
+
+
+	<script src="angular.js"></script>
+
+	<script>
+	var myApp = angular.module('myApp',[]);
+	myApp.controller("Ctrl01",function($scope){
+		$scope.isTwoFish = true;
+	});
+
+	myApp.run(function($rootScope,$timeout){
+		$timeout(function() {
+			$rootScope.myHref = "http://www.baidu.com";
+		}, 2000);
+
+	})
+
+	</script>
+
+</body>
+</html>
