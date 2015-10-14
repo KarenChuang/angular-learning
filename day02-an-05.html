@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>filter</title>
+</head>
+<body ng-app="myapp">
+	<div ng-controller="demoCtrl">
+		{{ country | lowercase }} <!-- html中使用 -->
+		{{ name }}
+		<!-- filter -->
+		{{ person | filter:'e' }} <!-- 留下包含字母e的 -->
+		{{ person | filter:'!e'}} <!-- 留下不包含字母e的 -->
+		{{ 444444499 | number}}
+		<br>
+		{{ 'my name is' | filterName }}
+
+		
+	</div>
+
+	<script src="angular.js"></script>
+	<script>
+	var myapp = angular.module('myapp.filters',[]);
+	// myapp.controller('demoCtrl',function($scope,$filter){
+	// 	$scope.country = "ZHONG";
+	// 	$scope.name = $filter('uppercase')('ddd');//通过引用$filter来调用过滤器。
+	// 	$scope.person = ['davi','wang','ke','we'];//数组
+	// 	$scope.num = 123.444555;
+	// })
+	myapp.filter('filterName',function(){
+		return function(input){
+			if(input) {
+				return input[0].toUpperCase()+input.slice(1);
+			}
+		}
+		
+	})
+	</script>
+</body>
+</html>

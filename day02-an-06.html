@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ng-options</title>
+</head>
+<body ng-app="myapp">
+	<div ng-controller="userCtrl">
+		<select ng-model="user" ng-options="user.name for user in users">
+			<option value="">choose user</option>
+		</select>
+		choosed user :{{user.name}}
+
+<!-- 		<br>
+		<select ng-options="obj.name as obj for (obj.name,obj) in obj">
+			<option value="">choose user</option>
+		</select> -->
+	</div>
+	<script src="angular.js"></script>
+	<script>
+	angular.module("myapp",[])
+	.controller('userCtrl',function($scope){
+		$scope.users = [
+			{name:'wang'},
+			{name:'zhao'},
+			{name:'zhong'},
+			{name:'he'}
+		]
+		 // obj = {
+		 // 	name:'wang',
+		 // 	age:20,
+		 // 	gender:'male'
+		 // };
+	})
+
+
+
+	</script>
+</body>
+</html>

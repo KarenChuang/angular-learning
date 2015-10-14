@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>通过指令操控内部作用域</title>
+</head>
+<body ng-app="myApp">
+     <!-- 01-－－－－－－－－－－－－－－－－－－－－－－－－ -->
+	<h2>01</h2>
+	<div ng-controller="myCtrl">
+		{{model.pro}}
+		<button ng-click="change()">changePro</button>
+	</div>
+	<!-- 02 －－－－－－－－－－－－－－－－－－－－－－－－－－ -->
+	<h2>02</h2>
+	<div ng-controller="parenCtrl">
+		{{Model.someValue}}
+		<button ng-click="changeFromParent()">changeParent</button>
+
+		<div ng-controller="childCtrl">
+			{{Model.someValue}}
+			<button ng-click="changeFromChild()">changeChild</button>
+		</div>
+
+	</div>
+	<script src="angular.js"></script>
+	<script>
+	var myApp = angular.module("myApp",[]);
+	//01--------------------------------------------------
+	myApp.controller("myCtrl",function($scope){
+		$scope.model = {
+			pro : "Karen"
+		};
+		$scope.change = function(){
+			$scope.model.pro = "EPH";
+		};
+	});
+	//02-------------------wrong-------------------------------
+	// myApp.controller("parenCtrl",function($scope){
+	// 	$scope.parenName = "papa";
+	// 	$scope.changeFromParent = function(){
+	// 		$scope.parenName = "change-papa";
+	// 	};
+	// });
+	// myApp.controller("childCtrl",function($scope){
+	// 	$scope.changeFromChild = function(){
+	// 		$scope.parenName = "chagne from child";
+	// 	};
+	// });
+
+	//03-------------------corrective-------------------------------
+	myApp.controller("parenCtrl",function($scope){
+		$scope.Model = {
+			someValue : "papa-value" 
+			//通过对象｛｝的形式，这时候如果子控制器修改的是对该model的引用复制，所以修改子scope中的属性的时候，父scope也会被修改
+		};
+		$scope.changeFromParent = function(){
+			$scope.Model.someValue = "change from parent!";
+		}
+	});
+	myApp.controller("childCtrl",function($scope){
+		$scope.changeFromChild = function(){
+			$scope.Model.someValue = "change from child!";
+		}
+	});
+
+
+	</script>
+</body>
+</html>
